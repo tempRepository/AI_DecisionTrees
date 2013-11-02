@@ -30,6 +30,12 @@ public abstract class Attribute {
 
     }
 
+    
+    protected double log2(double argument)
+    {
+        return Math.log(argument)/Math.log(2);
+    }
+    
     protected abstract double entropy(ArrayList<Example> examples);
     
     public abstract LinkedHashMap<java.lang.Enum, Object> getPossibilities(ArrayList<Example> examples);

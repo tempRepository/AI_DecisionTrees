@@ -22,12 +22,13 @@ public class Bar extends Attribute {
         }
         
       /*  double a=informationContent(examplesBarTrue);*/
-        double informationContentBarTrue = ((double)examplesBarTrue.size() / (double)examples
-                .size()) * informationContent(examplesBarTrue);
-        double informationContentBarFalse = ((double)examplesBarFalse.size() / (double)examples
-                .size()) * informationContent(examplesBarFalse);
-
-        return informationContentBarTrue + informationContentBarFalse;
+        double probabilityTrue=((double) examplesBarTrue.size()
+                / ((double) examplesBarFalse.size() + (double) examplesBarTrue
+                        .size()));
+        double probabilityFalse=((double) examplesBarFalse.size()
+                / ((double) examplesBarFalse.size() + (double) examplesBarTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 

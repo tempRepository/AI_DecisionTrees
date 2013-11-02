@@ -21,12 +21,13 @@ public class FriOrSat extends Attribute {
             }
         }
         
-        double informationContentFriOrSatTrue = ((double)examplesFriOrSatTrue.size() / (double)examples
-                .size()) * informationContent(examplesFriOrSatTrue);
-        double informationContentFriOrSatFalse = ((double)examplesFriOrSatFalse.size() / (double)examples
-                .size()) * informationContent(examplesFriOrSatFalse);
-
-        return informationContentFriOrSatTrue + informationContentFriOrSatFalse;
+        double probabilityTrue=((double) examplesFriOrSatTrue.size()
+                / ((double) examplesFriOrSatFalse.size() + (double) examplesFriOrSatTrue
+                        .size()));
+        double probabilityFalse=((double) examplesFriOrSatFalse.size()
+                / ((double) examplesFriOrSatFalse.size() + (double) examplesFriOrSatTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 

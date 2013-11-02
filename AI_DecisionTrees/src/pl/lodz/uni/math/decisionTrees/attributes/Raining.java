@@ -21,14 +21,13 @@ public class Raining extends Attribute {
             }
         }
 
-        double informationContentRainingTrue = ((double) examplesRainingTrue
-                .size() / (double) examples.size())
-                * informationContent(examplesRainingTrue);
-        double informationContentRainingFalse = ((double) examplesRainingFalse
-                .size() / (double) examples.size())
-                * informationContent(examplesRainingFalse);
-
-        return informationContentRainingTrue + informationContentRainingFalse;
+        double probabilityTrue=((double) examplesRainingTrue.size()
+                / ((double) examplesRainingFalse.size() + (double) examplesRainingTrue
+                        .size()));
+        double probabilityFalse=((double) examplesRainingFalse.size()
+                / ((double) examplesRainingFalse.size() + (double) examplesRainingTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 

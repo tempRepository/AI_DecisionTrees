@@ -21,15 +21,13 @@ public class Reservation extends Attribute {
             }
         }
 
-        double informationContentReservationTrue = ((double) examplesReservationTrue
-                .size() / (double) examples.size())
-                * informationContent(examplesReservationTrue);
-        double informationContentReservationFalse = ((double) examplesReservationFalse
-                .size() / (double) examples.size())
-                * informationContent(examplesReservationFalse);
-
-        return informationContentReservationTrue
-                + informationContentReservationFalse;
+        double probabilityTrue=((double) examplesReservationTrue.size()
+                / ((double) examplesReservationFalse.size() + (double) examplesReservationTrue
+                        .size()));
+        double probabilityFalse=((double) examplesReservationFalse.size()
+                / ((double) examplesReservationFalse.size() + (double) examplesReservationTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 

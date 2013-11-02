@@ -8,25 +8,9 @@ import pl.lodz.uni.math.decisionTrees.Example;
 
 public class Alternate extends Attribute {
 
-    protected double entropy(ArrayList<Example> examples) {
+    public double entropy(ArrayList<Example> examples) {
         // rozkład klas decyzyjnych dla każdej wartości atrybutu Alternate-
         // True, False
-        /*
-         * double counterAlternateTrueFinalTrue = 0; double
-         * counterAlternateFalseFinalTrue = 0; double
-         * counterAlternateTrueFinalFalse = 0; double
-         * counterAlternateFalseFinalFalse = 0;
-         */
-
-        /*
-         * for (Example example : examples) { if (example.getAlternate() ==
-         * true) { if (example.getFinalDecision() == true) {
-         * counterAlternateTrueFinalTrue++; } else {
-         * counterAlternateTrueFinalFalse++; } } else { if
-         * (example.getFinalDecision() == true) {
-         * counterAlternateFalseFinalTrue++; } else {
-         * counterAlternateFalseFinalFalse++; } } }
-         */
         ArrayList<Example> examplesAlternateTrue = new ArrayList<>();
         ArrayList<Example> examplesAlternateFalse = new ArrayList<>();
 
@@ -38,24 +22,15 @@ public class Alternate extends Attribute {
             }
         }
 
-        // liczenie entropii dla zbioru przykładów dla atrybutu Alternate
-        /*
-         * System.out.println(((double)examplesAlternateTrue.size() /
-         * ((double)examplesAlternateFalse.size() +
-         * (double)examplesAlternateTrue.size()) *
-         * informationGain(examplesAlternateTrue)));
-         */
-        /*
-         * System.out.println((examplesAlternateFalse.size() /
-         * (examplesAlternateFalse.size() + examplesAlternateTrue .size()) *
-         * informationGain(examplesAlternateFalse)));
-         */
-        return ((double) examplesAlternateTrue.size()
+
+
+        double probabilityTrue=((double) examplesAlternateTrue.size()
                 / ((double) examplesAlternateFalse.size() + (double) examplesAlternateTrue
-                        .size()) * informationContent(examplesAlternateTrue))
-                + ((double) examplesAlternateFalse.size()
-                        / ((double) examplesAlternateFalse.size() + (double) examplesAlternateTrue
-                                .size()) * informationContent(examplesAlternateFalse));
+                        .size()));
+        double probabilityFalse=((double) examplesAlternateFalse.size()
+                / ((double) examplesAlternateFalse.size() + (double) examplesAlternateTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 

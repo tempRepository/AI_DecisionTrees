@@ -21,12 +21,13 @@ public class Hungry extends Attribute {
             }
         }
         
-        double informationContentHungryTrue = ((double)examplesHungryTrue.size() / (double)examples
-                .size()) * informationContent(examplesHungryTrue);
-        double informationContentHungryFalse = ((double)examplesHungryFalse.size() / (double)examples
-                .size()) * informationContent(examplesHungryFalse);
-
-        return informationContentHungryTrue + informationContentHungryFalse;
+        double probabilityTrue=((double) examplesHungryTrue.size()
+                / ((double) examplesHungryFalse.size() + (double) examplesHungryTrue
+                        .size()));
+        double probabilityFalse=((double) examplesHungryFalse.size()
+                / ((double) examplesHungryFalse.size() + (double) examplesHungryTrue
+                        .size()));
+        return -(probabilityTrue*log2(probabilityTrue)+probabilityFalse*log2(probabilityFalse));
 
     }
 
