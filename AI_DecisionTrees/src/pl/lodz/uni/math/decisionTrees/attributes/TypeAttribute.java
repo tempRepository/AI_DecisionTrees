@@ -37,17 +37,16 @@ public class TypeAttribute extends Attribute {
             }
         }
 
-        double informationContentTypeBurger = (examplesTypeBurger.size() / examples
+        double probabilityTypeBurger = (examplesTypeBurger.size() / examples
                 .size()) * informationContent(examplesTypeBurger);
-        double informationContentTypeFrench = (examplesTypeFrench.size() / examples
+        double probabilityTypeFrench = (examplesTypeFrench.size() / examples
                 .size()) * informationContent(examplesTypeFrench);
-        double informationContentItalian = (examplesTypeItalian.size() / examples
+        double probabilityTypeItalian = (examplesTypeItalian.size() / examples
                 .size()) * informationContent(examplesTypeItalian);
-        double informationContentMoreThai = (examplesTypeThai.size() / examples
+        double probabilityTypeThai = (examplesTypeThai.size() / examples
                 .size()) * informationContent(examplesTypeThai);
 
-        return informationContentTypeBurger + informationContentTypeFrench
-                + informationContentItalian + informationContentMoreThai;
+        return -(probabilityTypeBurger*log2(probabilityTypeBurger)+ probabilityTypeFrench*log2(probabilityTypeFrench) + probabilityTypeItalian*log2(probabilityTypeItalian) + probabilityTypeThai*log2(probabilityTypeThai));
     }
 
     @Override

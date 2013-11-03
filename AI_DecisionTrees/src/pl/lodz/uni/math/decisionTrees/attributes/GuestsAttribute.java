@@ -33,15 +33,15 @@ public class GuestsAttribute extends Attribute {
             }
         }
 
-        double informationContentGuestsFull = (examplesGuestsFull.size() / examples
-                .size()) * informationContent(examplesGuestsFull);
-        double informationContentGuestsSome = (examplesGuestsSome.size() / examples
-                .size()) * informationContent(examplesGuestsSome);
-        double informationContentNone = (examplesGuestsNone.size() / examples
-                .size()) * informationContent(examplesGuestsNone);
+      
+        double probabilityGuestsFull = (examplesGuestsFull.size() / examples
+                .size());
+        double probabilityGuestsSome = (examplesGuestsSome.size() / examples
+                .size());
+        double probabilityGuestsNone = (examplesGuestsNone.size() / examples
+                .size());
 
-        return informationContentGuestsFull + informationContentGuestsSome
-                + informationContentNone;
+        return -(probabilityGuestsFull*log2(probabilityGuestsFull) + probabilityGuestsSome*log2(probabilityGuestsSome) + probabilityGuestsNone*log2(probabilityGuestsNone));
     }
 
     @Override

@@ -35,15 +35,14 @@ public class PriceAttribute extends Attribute {
             }
         }
 
-        double informationContentPriceCheap = (examplesPriceCheap.size() / examples
+        double probabilityPriceCheap = (examplesPriceCheap.size() / examples
                 .size()) * informationContent(examplesPriceCheap);
-        double informationContentPriceMedium = (examplesPriceMedium.size() / examples
+        double probabilityPriceMedium = (examplesPriceMedium.size() / examples
                 .size()) * informationContent(examplesPriceMedium);
-        double informationPriceExpensive = (examplesPriceExpensive.size() / examples
+        double probabilityPriceExpensive = (examplesPriceExpensive.size() / examples
                 .size()) * informationContent(examplesPriceExpensive);
 
-        return informationContentPriceCheap + informationContentPriceMedium
-                + informationPriceExpensive;
+        return -(probabilityPriceCheap*log2(probabilityPriceCheap) + probabilityPriceMedium*log2(probabilityPriceMedium) + probabilityPriceExpensive*log2(probabilityPriceExpensive));
     }
 
     @Override

@@ -37,17 +37,15 @@ public class Estimate extends Attribute {
         }
 
         double probabilityTo10 = (examplesEstimateTo10.size() / examples
-                .size()) * informationContent(examplesEstimateTo10);
+                .size());
         double probabilityTo30 = (examplesEstimateTo30.size() / examples
-                .size()) * informationContent(examplesEstimateTo30);
+                .size());
         double probabilityTo60 = (examplesEstimateTo60.size() / examples
-                .size()) * informationContent(examplesEstimateTo60);
+                .size()) ;
         double probabilityMoreThan60 = (examplesEstimateMoreThan60
-                .size() / examples.size())
-                * informationContent(examplesEstimateMoreThan60);
+                .size() / examples.size());
 
-        return probabilityTo10 + probabilityTo30
-                + probabilityTo60 + probabilityMoreThan60;
+        return -(probabilityTo10*log2(probabilityTo10) + probabilityMoreThan60*log2(probabilityMoreThan60) + probabilityTo30*log2(probabilityTo30) + probabilityTo60*log2(probabilityTo60));
     }
 
     @Override
