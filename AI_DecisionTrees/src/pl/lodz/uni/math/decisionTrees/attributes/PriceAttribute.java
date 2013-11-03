@@ -35,11 +35,11 @@ public class PriceAttribute extends TreeAttribute {
             }
         }
 
-        double probabilityPriceCheap = (examplesPriceCheap.size() / examples
+        double probabilityPriceCheap = ((double)examplesPriceCheap.size() / (double)examples
                 .size()) * informationContent(examplesPriceCheap);
-        double probabilityPriceMedium = (examplesPriceMedium.size() / examples
+        double probabilityPriceMedium = ((double)examplesPriceMedium.size() / (double)examples
                 .size()) * informationContent(examplesPriceMedium);
-        double probabilityPriceExpensive = (examplesPriceExpensive.size() / examples
+        double probabilityPriceExpensive = ((double)examplesPriceExpensive.size() / (double)examples
                 .size()) * informationContent(examplesPriceExpensive);
 
         return -(probabilityPriceCheap * log2(probabilityPriceCheap)
@@ -98,13 +98,13 @@ public class PriceAttribute extends TreeAttribute {
             }
         }
 
-        double remainderPriceExpensive = (examplesPriceExpensive.size() / examples
+        double remainderPriceExpensive = ((double)examplesPriceExpensive.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesPriceExpensive);
-        double remainderPriceMedium = (examplesPriceMedium.size() / examples
+        double remainderPriceMedium = ((double)examplesPriceMedium.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesPriceMedium);
-        double remainderGuestsCheap = (examplesPriceCheap.size() / examples
+        double remainderGuestsCheap = ((double)examplesPriceCheap.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesPriceCheap);
 

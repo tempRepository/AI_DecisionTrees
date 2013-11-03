@@ -67,7 +67,7 @@ public class Raining extends TreeAttribute {
             }
         }
         
-        return (((examplesAlternateTrue.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ (((examplesAlternateFalse.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
+        return ((((double)examplesAlternateTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ ((((double)examplesAlternateFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
     }
 
 }

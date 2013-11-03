@@ -34,11 +34,11 @@ public class GuestsAttribute extends TreeAttribute {
         }
 
       
-        double probabilityGuestsFull = (examplesGuestsFull.size() / examples
+        double probabilityGuestsFull = ((double)examplesGuestsFull.size() / (double)examples
                 .size());
-        double probabilityGuestsSome = (examplesGuestsSome.size() / examples
+        double probabilityGuestsSome = ((double)examplesGuestsSome.size() / (double)examples
                 .size());
-        double probabilityGuestsNone = (examplesGuestsNone.size() / examples
+        double probabilityGuestsNone = ((double)examplesGuestsNone.size() / (double)examples
                 .size());
 
         return -(probabilityGuestsFull*log2(probabilityGuestsFull) + probabilityGuestsSome*log2(probabilityGuestsSome) + probabilityGuestsNone*log2(probabilityGuestsNone));
@@ -46,7 +46,9 @@ public class GuestsAttribute extends TreeAttribute {
 
     @Override
     public double informationGain(ArrayList<Example> examples) {
-        return ( TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
+        double finalDecisionEntropy=TreeAttribute.finalDecisionEntropy(examples);
+        double remainder=remainder(examples);
+        return ( finalDecisionEntropy - remainder);
     }
 
     @Override
@@ -95,11 +97,12 @@ public class GuestsAttribute extends TreeAttribute {
             }
         }
 
-        double remainderGuestsFull = (examplesGuestsFull.size() / examples.size())
+  
+        double remainderGuestsFull = ((double)examplesGuestsFull.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesGuestsFull);
-        double remainderGuestsSome = (examplesGuestsSome.size() / examples.size())
+        double remainderGuestsSome = ((double)examplesGuestsSome.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesGuestsSome);
-        double remainderGuestsNone = (examplesGuestsNone.size() / examples.size())
+        double remainderGuestsNone = ((double)examplesGuestsNone.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesGuestsNone);
 
         return   remainderGuestsFull + remainderGuestsSome

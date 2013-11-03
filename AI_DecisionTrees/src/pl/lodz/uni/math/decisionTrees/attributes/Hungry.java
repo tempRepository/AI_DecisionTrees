@@ -56,18 +56,18 @@ public class Hungry extends TreeAttribute {
     
     @Override
     protected double remainder(ArrayList<Example> examples) {
-        ArrayList<Example> examplesAlternateTrue = new ArrayList<>();
-        ArrayList<Example> examplesAlternateFalse = new ArrayList<>();
+        ArrayList<Example> exampleHungryTrue = new ArrayList<>();
+        ArrayList<Example> examplesHungryFalse = new ArrayList<>();
 
         for (Example example : examples) {
             if (example.getHungry() == true) {
-                examplesAlternateTrue.add(example);
+                exampleHungryTrue.add(example);
             } else {
-                examplesAlternateFalse.add(example);
+                examplesHungryFalse.add(example);
             }
         }
-        
-        return (((examplesAlternateTrue.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ (((examplesAlternateFalse.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
+        double temp=((((double)exampleHungryTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(exampleHungryTrue))+ ((((double)examplesHungryFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesHungryFalse));
+        return temp;
     }
 
 }

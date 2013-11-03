@@ -1,5 +1,14 @@
 package pl.lodz.uni.math.decisionTrees;
 
+import org.w3c.dom.*;
+
+import javax.xml.xpath.*;
+import javax.xml.parsers.*;
+
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Random;
@@ -67,7 +76,8 @@ public class Tree {
 
     @SuppressWarnings("rawtypes")
     public static Object decisionTreeLearning(ArrayList<Example> examples,
-            ArrayList<TreeAttribute> attributes, ArrayList<Example> parent_examples) {
+            ArrayList<TreeAttribute> attributes,
+            ArrayList<Example> parent_examples) {
         Boolean allFalse = true;
         Boolean allTrue = true;
 
@@ -92,6 +102,7 @@ public class Tree {
             double currentMaxInformationGain = Double.MIN_VALUE;
             // znajdowanie najlepszego atrybutu
             for (TreeAttribute attribute : attributes) {
+                double temp = attribute.informationGain(examples);
                 if (currentMaxInformationGain < attribute
                         .informationGain(examples)) {
                     currentMaxInformationGain = attribute
@@ -136,6 +147,7 @@ public class Tree {
 
     @Override
     public String toString() {
+
         System.out.println("Root:" + root.toString());
         System.out.println("Branches:");
         for (Enum key : possibilities.keySet()) {
@@ -143,7 +155,81 @@ public class Tree {
                     + possibilities.get(key).toString() + " || ");
         }
         System.out.println("\n\n");
-        return "Tree with root:"+root.toString();
+        return "Tree with root:" + root.toString();
     }
 
+    public static ArrayList<Example> getExamples(String fileName)
+            throws ParserConfigurationException, SAXException, IOException,
+            XPathExpressionException {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory
+                .newInstance();
+        domFactory.setNamespaceAware(true);
+        DocumentBuilder builder = domFactory.newDocumentBuilder();
+        Document doc = builder.parse("examples.xml");
+        XPath xpath = XPathFactory.newInstance().newXPath();
+        // XPath Query for showing all nodes value
+        XPathExpression expr = xpath.compile("//example/*/text()");
+
+        Object result = expr.evaluate(doc, XPathConstants.NODESET);
+        NodeList nodes = (NodeList) result;
+        ArrayList<Example> examples = new ArrayList<>();
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Example example = new Example();
+            boolean alternative;
+            boolean bar;
+            boolean friOrSat;
+            boolean hungry;
+            Guests guests;
+            Price price;
+            boolean raining;
+            boolean reservation;
+            Type type;
+            WaitEstimate estimate;
+            boolean finalDecision;
+            if (nodes.item(i++).getNodeValue() == "true") {
+                alternative = true;
+            } else {
+                alternative = false;
+            }
+
+            if (nodes.item(i++).getNodeValue() == "true") {
+                bar = true;
+            } else {
+                bar = false;
+            }
+
+            if (nodes.item(i++).getNodeValue() == "true") {
+                friOrSat = true;
+            } else {
+                friOrSat = false;
+            }
+
+            if (nodes.item(i++).getNodeValue() == "true") {
+                hungry = true;
+            } else {
+                hungry = false;
+            }
+            
+            if (nodes.item(i).getNodeValue()=="some") {
+                guests=Guests.SOME;
+            } else if(nodes.item(i).getNodeValue()=="full"){
+guests=Guests.FULL;
+            }
+            else {
+                guests=Guests.NONE;
+            }
+            i++;
+            
+            if (nodes.item(i).getNodeValue()=="cheap") {
+                price=Price.CHEAP;
+            } else {
+
+            }
+
+            System.out.println(nodes.item(i).getChildNodes().item(0)
+                    .getNodeValue());
+        }
+        return null;
+
+    }
 }

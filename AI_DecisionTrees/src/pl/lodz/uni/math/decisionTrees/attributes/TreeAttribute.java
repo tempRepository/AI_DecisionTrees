@@ -29,22 +29,29 @@ public abstract class TreeAttribute {
         }
 
     }
-    
+
     protected abstract double remainder(ArrayList<Example> examples);
-    
-    protected static double log2(double argument)
-    {
-        return Math.log(argument)/Math.log(2);
+
+    protected static double log2(double argument) {
+        return Math.log(argument) / Math.log(2);
     }
-    
+
     protected abstract double entropy(ArrayList<Example> examples);
-    
-    public abstract LinkedHashMap<java.lang.Enum, Object> getPossibilities(ArrayList<Example> examples);
-    
+
+    public abstract LinkedHashMap<java.lang.Enum, Object> getPossibilities(
+            ArrayList<Example> examples);
+
     public abstract double informationGain(ArrayList<Example> examples);
-    
+
     private static double B(double q) {
-        return -(q * log2(q) + (1 - q) * log2(1 - q));
+        if (q == 1) {
+            return 0;
+        } else if (q==0) {
+            return 1;
+        } else {
+            return -(q * log2(q) + (1 - q) * log2(1 - q));
+        }
+
     }
 
     protected static double finalDecisionEntropy(ArrayList<Example> examples) {
@@ -58,6 +65,13 @@ public abstract class TreeAttribute {
             }
 
         }
-       return B(positiveCounter/(positiveCounter+negativeCounter));
+        
+        //Eksperymentalna wersja!
+        if (positiveCounter==0 && negativeCounter==0) {
+            return 0;
+        }
+        double tempResult = B(positiveCounter
+                / (positiveCounter + negativeCounter));
+        return tempResult;
     }
 }

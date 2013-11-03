@@ -7,7 +7,7 @@ import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 
 public class Alternate extends TreeAttribute {
-
+  //zmienić na protected!
     public double entropy(ArrayList<Example> examples) {
         // rozkład klas decyzyjnych dla każdej wartości atrybutu Alternate-
         // True, False
@@ -69,7 +69,7 @@ public class Alternate extends TreeAttribute {
             }
         }
         
-        return (((examplesAlternateTrue.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ (((examplesAlternateFalse.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
+        return ((((double)examplesAlternateTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ ((((double)examplesAlternateFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
     }
 
 }

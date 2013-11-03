@@ -38,13 +38,13 @@ public class TypeAttribute extends TreeAttribute {
             }
         }
 
-        double probabilityTypeBurger = (examplesTypeBurger.size() / examples
+        double probabilityTypeBurger = ((double)examplesTypeBurger.size() / (double)examples
                 .size()) * informationContent(examplesTypeBurger);
-        double probabilityTypeFrench = (examplesTypeFrench.size() / examples
+        double probabilityTypeFrench = ((double)examplesTypeFrench.size() / (double)examples
                 .size()) * informationContent(examplesTypeFrench);
-        double probabilityTypeItalian = (examplesTypeItalian.size() / examples
+        double probabilityTypeItalian = ((double)examplesTypeItalian.size() / (double)examples
                 .size()) * informationContent(examplesTypeItalian);
-        double probabilityTypeThai = (examplesTypeThai.size() / examples
+        double probabilityTypeThai = ((double)examplesTypeThai.size() / (double)examples
                 .size()) * informationContent(examplesTypeThai);
 
         return -(probabilityTypeBurger*log2(probabilityTypeBurger)+ probabilityTypeFrench*log2(probabilityTypeFrench) + probabilityTypeItalian*log2(probabilityTypeItalian) + probabilityTypeThai*log2(probabilityTypeThai));
@@ -108,16 +108,16 @@ public class TypeAttribute extends TreeAttribute {
             }
         }
 
-        double remainderTypeBurger = (examplesTypeBurger.size() / examples
+        double remainderTypeBurger = ((double)examplesTypeBurger.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesTypeBurger);
-        double remainderTypeFrench = (examplesTypeFrench.size() / examples
+        double remainderTypeFrench = ((double)examplesTypeFrench.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesTypeFrench);
-        double remainderTypeItalian = (examplesTypeItalian.size() / examples
+        double remainderTypeItalian = ((double)examplesTypeItalian.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesTypeItalian);
-        double remainderTypeThai = (examplesTypeThai.size() / examples
+        double remainderTypeThai = ((double)examplesTypeThai.size() / (double)examples
                 .size())
                 * TreeAttribute.finalDecisionEntropy(examplesTypeThai);
 

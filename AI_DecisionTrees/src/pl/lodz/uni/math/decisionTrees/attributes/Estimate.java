@@ -36,10 +36,10 @@ public class Estimate extends TreeAttribute {
             }
         }
 
-        double probabilityTo10 = (examplesEstimateTo10.size() / examples.size());
-        double probabilityTo30 = (examplesEstimateTo30.size() / examples.size());
-        double probabilityTo60 = (examplesEstimateTo60.size() / examples.size());
-        double probabilityMoreThan60 = (examplesEstimateMoreThan60.size() / examples
+        double probabilityTo10 = ((double)examplesEstimateTo10.size() / (double)examples.size());
+        double probabilityTo30 = ((double)examplesEstimateTo30.size() / (double)examples.size());
+        double probabilityTo60 = ((double)examplesEstimateTo60.size() / (double)examples.size());
+        double probabilityMoreThan60 = ((double)examplesEstimateMoreThan60.size() / (double)examples
                 .size());
 
         return -(probabilityTo10 * log2(probabilityTo10)
@@ -106,13 +106,13 @@ public class Estimate extends TreeAttribute {
             }
         }
 
-        double remainderTo10 = (examplesEstimateTo10.size() / examples.size())
+        double remainderTo10 = ((double)examplesEstimateTo10.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesEstimateTo10);
-        double remainderTo30 = (examplesEstimateTo30.size() / examples.size())
+        double remainderTo30 = ((double)examplesEstimateTo30.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesEstimateTo30);
-        double remainderTo60 = (examplesEstimateTo60.size() / examples.size())
+        double remainderTo60 = ((double)examplesEstimateTo60.size() / (double)examples.size())
                 * TreeAttribute.finalDecisionEntropy(examplesEstimateTo60);
-        double remainderMoreThan60 = (examplesEstimateMoreThan60.size() / examples
+        double remainderMoreThan60 = ((double)examplesEstimateMoreThan60.size() / (double)examples
                 .size())
                 * TreeAttribute
                         .finalDecisionEntropy(examplesEstimateMoreThan60);
