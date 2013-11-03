@@ -7,7 +7,7 @@ import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 import pl.lodz.uni.math.decisionTrees.WaitEstimate;
 
-public class Estimate extends Attribute {
+public class Estimate extends TreeAttribute {
 
     @Override
     protected double entropy(ArrayList<Example> examples) {
@@ -36,21 +36,21 @@ public class Estimate extends Attribute {
             }
         }
 
-        double probabilityTo10 = (examplesEstimateTo10.size() / examples
+        double probabilityTo10 = (examplesEstimateTo10.size() / examples.size());
+        double probabilityTo30 = (examplesEstimateTo30.size() / examples.size());
+        double probabilityTo60 = (examplesEstimateTo60.size() / examples.size());
+        double probabilityMoreThan60 = (examplesEstimateMoreThan60.size() / examples
                 .size());
-        double probabilityTo30 = (examplesEstimateTo30.size() / examples
-                .size());
-        double probabilityTo60 = (examplesEstimateTo60.size() / examples
-                .size()) ;
-        double probabilityMoreThan60 = (examplesEstimateMoreThan60
-                .size() / examples.size());
 
-        return -(probabilityTo10*log2(probabilityTo10) + probabilityMoreThan60*log2(probabilityMoreThan60) + probabilityTo30*log2(probabilityTo30) + probabilityTo60*log2(probabilityTo60));
+        return -(probabilityTo10 * log2(probabilityTo10)
+                + probabilityMoreThan60 * log2(probabilityMoreThan60)
+                + probabilityTo30 * log2(probabilityTo30) + probabilityTo60
+                * log2(probabilityTo60));
     }
 
     @Override
     public double informationGain(ArrayList<Example> examples) {
-        return (informationContent(examples) - entropy(examples));
+        return (TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
     }
 
     @Override
@@ -77,6 +77,47 @@ public class Estimate extends Attribute {
         possibilities.put(WaitEstimate.TO60, examplesTo60);
         possibilities.put(WaitEstimate.MORETHAN60, examplesMoreThan60);
         return possibilities;
+    }
+
+    @Override
+    protected double remainder(ArrayList<Example> examples) {
+        ArrayList<Example> examplesEstimateTo10 = new ArrayList<>();
+        ArrayList<Example> examplesEstimateTo30 = new ArrayList<>();
+        ArrayList<Example> examplesEstimateTo60 = new ArrayList<>();
+        ArrayList<Example> examplesEstimateMoreThan60 = new ArrayList<>();
+
+        for (Example example : examples) {
+            WaitEstimate estimate = example.getWaitEstimate();
+            switch (estimate) {
+            case TO10:
+                examplesEstimateTo10.add(example);
+                break;
+            case TO30:
+                examplesEstimateTo30.add(example);
+                break;
+            case TO60:
+                examplesEstimateTo60.add(example);
+                break;
+            case MORETHAN60:
+                examplesEstimateMoreThan60.add(example);
+                break;
+            default:
+                break;
+            }
+        }
+
+        double remainderTo10 = (examplesEstimateTo10.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesEstimateTo10);
+        double remainderTo30 = (examplesEstimateTo30.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesEstimateTo30);
+        double remainderTo60 = (examplesEstimateTo60.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesEstimateTo60);
+        double remainderMoreThan60 = (examplesEstimateMoreThan60.size() / examples
+                .size())
+                * TreeAttribute
+                        .finalDecisionEntropy(examplesEstimateMoreThan60);
+        return remainderMoreThan60 + remainderTo10 + remainderTo30
+                + remainderTo60;
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 
-public class Alternate extends Attribute {
+public class Alternate extends TreeAttribute {
 
     public double entropy(ArrayList<Example> examples) {
         // rozkład klas decyzyjnych dla każdej wartości atrybutu Alternate-
@@ -35,7 +35,7 @@ public class Alternate extends Attribute {
     }
 
     public double informationGain(ArrayList<Example> examples) {
-        return (informationContent(examples) - entropy(examples));
+        return ( TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
     }
 
     @Override
@@ -54,6 +54,22 @@ public class Alternate extends Attribute {
         possibilities.put(Decision.YES, examplesYes);
         possibilities.put(Decision.NO, examplesNo);
         return possibilities;
+    }
+
+    @Override
+    protected double remainder(ArrayList<Example> examples) {
+        ArrayList<Example> examplesAlternateTrue = new ArrayList<>();
+        ArrayList<Example> examplesAlternateFalse = new ArrayList<>();
+
+        for (Example example : examples) {
+            if (example.getAlternate() == true) {
+                examplesAlternateTrue.add(example);
+            } else {
+                examplesAlternateFalse.add(example);
+            }
+        }
+        
+        return (((examplesAlternateTrue.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ (((examplesAlternateFalse.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
     }
 
 }

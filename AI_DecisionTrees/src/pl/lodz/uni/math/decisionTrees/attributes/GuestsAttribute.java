@@ -8,7 +8,7 @@ import pl.lodz.uni.math.decisionTrees.Example;
 import pl.lodz.uni.math.decisionTrees.Guests;
 import pl.lodz.uni.math.decisionTrees.WaitEstimate;
 
-public class GuestsAttribute extends Attribute {
+public class GuestsAttribute extends TreeAttribute {
 
     @Override
     protected double entropy(ArrayList<Example> examples) {
@@ -46,7 +46,7 @@ public class GuestsAttribute extends Attribute {
 
     @Override
     public double informationGain(ArrayList<Example> examples) {
-        return (informationContent(examples) - entropy(examples));
+        return ( TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
     }
 
     @Override
@@ -71,4 +71,39 @@ public class GuestsAttribute extends Attribute {
         return possibilities;
     }
 
+    
+    @Override
+    protected double remainder(ArrayList<Example> examples) {
+        ArrayList<Example> examplesGuestsFull = new ArrayList<>();
+        ArrayList<Example> examplesGuestsSome = new ArrayList<>();
+        ArrayList<Example> examplesGuestsNone = new ArrayList<>();
+
+        for (Example example : examples) {
+            Guests guests = example.getGuests();
+            switch (guests) {
+            case FULL:
+                examplesGuestsFull.add(example);
+                break;
+            case SOME:
+                examplesGuestsSome.add(example);
+                break;
+            case NONE:
+                examplesGuestsNone.add(example);
+                break;
+            default:
+                break;
+            }
+        }
+
+        double remainderGuestsFull = (examplesGuestsFull.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesGuestsFull);
+        double remainderGuestsSome = (examplesGuestsSome.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesGuestsSome);
+        double remainderGuestsNone = (examplesGuestsNone.size() / examples.size())
+                * TreeAttribute.finalDecisionEntropy(examplesGuestsNone);
+
+        return   remainderGuestsFull + remainderGuestsSome
+                + remainderGuestsNone;
+    }
+    
 }

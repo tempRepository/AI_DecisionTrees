@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 
-public class Reservation extends Attribute {
+public class Reservation extends TreeAttribute {
 
     @Override
     protected double entropy(ArrayList<Example> examples) {
@@ -33,7 +33,7 @@ public class Reservation extends Attribute {
 
     @Override
     public double informationGain(ArrayList<Example> examples) {
-        return (informationContent(examples) - entropy(examples));
+        return ( TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
     }
 
     @Override
@@ -60,6 +60,22 @@ public class Reservation extends Attribute {
         } else {
             return false;
         }
+    }
+    
+    @Override
+    protected double remainder(ArrayList<Example> examples) {
+        ArrayList<Example> examplesAlternateTrue = new ArrayList<>();
+        ArrayList<Example> examplesAlternateFalse = new ArrayList<>();
+
+        for (Example example : examples) {
+            if (example.getReservation() == true) {
+                examplesAlternateTrue.add(example);
+            } else {
+                examplesAlternateFalse.add(example);
+            }
+        }
+        
+        return (((examplesAlternateTrue.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ (((examplesAlternateFalse.size())/examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
     }
 
 }

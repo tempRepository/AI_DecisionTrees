@@ -5,10 +5,11 @@ import java.util.LinkedHashMap;
 
 import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
+import pl.lodz.uni.math.decisionTrees.Price;
 import pl.lodz.uni.math.decisionTrees.Type;
 import pl.lodz.uni.math.decisionTrees.WaitEstimate;
 
-public class TypeAttribute extends Attribute {
+public class TypeAttribute extends TreeAttribute {
 
     @Override
     protected double entropy(ArrayList<Example> examples) {
@@ -51,7 +52,7 @@ public class TypeAttribute extends Attribute {
 
     @Override
     public double informationGain(ArrayList<Example> examples) {
-        return (informationContent(examples) - entropy(examples));
+        return ( TreeAttribute.finalDecisionEntropy(examples) - remainder(examples));
     }
 
     @Override
@@ -78,6 +79,50 @@ public class TypeAttribute extends Attribute {
         possibilities.put(Type.ITALIAN, examplesItalian);
         possibilities.put(Type.THAI, examplesThai);
         return possibilities;
+    }
+    
+    @Override
+    protected double remainder(ArrayList<Example> examples) {
+        ArrayList<Example> examplesTypeBurger = new ArrayList<>();
+        ArrayList<Example> examplesTypeFrench = new ArrayList<>();
+        ArrayList<Example> examplesTypeItalian = new ArrayList<>();
+        ArrayList<Example> examplesTypeThai = new ArrayList<>();
+
+        for (Example example : examples) {
+            Type type = example.getType();
+            switch (type) {
+            case BURGER:
+                examplesTypeBurger.add(example);
+                break;
+            case FRENCH:
+                examplesTypeFrench.add(example);
+                break;
+            case ITALIAN:
+                examplesTypeItalian.add(example);
+                break;
+            case THAI:
+                examplesTypeThai.add(example);
+                break;
+            default:
+                break;
+            }
+        }
+
+        double remainderTypeBurger = (examplesTypeBurger.size() / examples
+                .size())
+                * TreeAttribute.finalDecisionEntropy(examplesTypeBurger);
+        double remainderTypeFrench = (examplesTypeFrench.size() / examples
+                .size())
+                * TreeAttribute.finalDecisionEntropy(examplesTypeFrench);
+        double remainderTypeItalian = (examplesTypeItalian.size() / examples
+                .size())
+                * TreeAttribute.finalDecisionEntropy(examplesTypeItalian);
+        double remainderTypeThai = (examplesTypeThai.size() / examples
+                .size())
+                * TreeAttribute.finalDecisionEntropy(examplesTypeThai);
+
+        return remainderTypeBurger + remainderTypeFrench
+                + remainderTypeItalian+ remainderTypeThai;
     }
 
 }

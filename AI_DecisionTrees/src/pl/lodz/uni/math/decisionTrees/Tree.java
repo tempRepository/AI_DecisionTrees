@@ -5,16 +5,16 @@ import java.util.LinkedHashMap;
 import java.util.Random;
 
 import pl.lodz.uni.math.decisionTrees.attributes.Alternate;
-import pl.lodz.uni.math.decisionTrees.attributes.Attribute;
+import pl.lodz.uni.math.decisionTrees.attributes.TreeAttribute;
 
 public class Tree {
-    Attribute root = null;
+    TreeAttribute root = null;
 
-    public Attribute getRoot() {
+    public TreeAttribute getRoot() {
         return root;
     }
 
-    public void setRoot(Attribute root) {
+    public void setRoot(TreeAttribute root) {
         this.root = root;
     }
 
@@ -38,7 +38,7 @@ public class Tree {
 
     }
 
-    public Tree(Attribute root) {
+    public Tree(TreeAttribute root) {
         this.root = root;
     }
 
@@ -67,7 +67,7 @@ public class Tree {
 
     @SuppressWarnings("rawtypes")
     public static Object decisionTreeLearning(ArrayList<Example> examples,
-            ArrayList<Attribute> attributes, ArrayList<Example> parent_examples) {
+            ArrayList<TreeAttribute> attributes, ArrayList<Example> parent_examples) {
         Boolean allFalse = true;
         Boolean allTrue = true;
 
@@ -88,10 +88,10 @@ public class Tree {
         } else if (attributes.size() == 0) {
             return pluralityValue(examples);
         } else {
-            Attribute theBestAttribute = null;
+            TreeAttribute theBestAttribute = null;
             double currentMaxInformationGain = Double.MIN_VALUE;
             // znajdowanie najlepszego atrybutu
-            for (Attribute attribute : attributes) {
+            for (TreeAttribute attribute : attributes) {
                 if (currentMaxInformationGain < attribute
                         .informationGain(examples)) {
                     currentMaxInformationGain = attribute
@@ -104,7 +104,7 @@ public class Tree {
             LinkedHashMap<Enum, Object> attributePossibilities = theBestAttribute
                     .getPossibilities(examples);
             for (Enum key : attributePossibilities.keySet()) {
-                ArrayList<Attribute> copyOfAttributes = (ArrayList<Attribute>) attributes
+                ArrayList<TreeAttribute> copyOfAttributes = (ArrayList<TreeAttribute>) attributes
                         .clone();
                 copyOfAttributes.remove(theBestAttribute);
                 newTree.getPossibilities().put(

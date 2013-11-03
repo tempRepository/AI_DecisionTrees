@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 
 import pl.lodz.uni.math.decisionTrees.Example;
 
-public abstract class Attribute {
+public abstract class TreeAttribute {
     protected double informationContent(ArrayList<Example> examples) {
         double positiveCounter = 0;
         double negativeCounter = 0;
@@ -29,9 +29,10 @@ public abstract class Attribute {
         }
 
     }
-
     
-    protected double log2(double argument)
+    protected abstract double remainder(ArrayList<Example> examples);
+    
+    protected static double log2(double argument)
     {
         return Math.log(argument)/Math.log(2);
     }
@@ -41,4 +42,22 @@ public abstract class Attribute {
     public abstract LinkedHashMap<java.lang.Enum, Object> getPossibilities(ArrayList<Example> examples);
     
     public abstract double informationGain(ArrayList<Example> examples);
+    
+    private static double B(double q) {
+        return -(q * log2(q) + (1 - q) * log2(1 - q));
+    }
+
+    protected static double finalDecisionEntropy(ArrayList<Example> examples) {
+        double positiveCounter = 0;
+        double negativeCounter = 0;
+        for (Example example : examples) {
+            if (example.getFinalDecision() == true) {
+                positiveCounter++;
+            } else {
+                negativeCounter++;
+            }
+
+        }
+       return B(positiveCounter/(positiveCounter+negativeCounter));
+    }
 }

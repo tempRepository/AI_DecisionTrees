@@ -3,7 +3,7 @@ package pl.lodz.uni.math.decisionTrees;
 import java.util.ArrayList;
 
 import pl.lodz.uni.math.decisionTrees.attributes.Alternate;
-import pl.lodz.uni.math.decisionTrees.attributes.Attribute;
+import pl.lodz.uni.math.decisionTrees.attributes.TreeAttribute;
 import pl.lodz.uni.math.decisionTrees.attributes.Bar;
 import pl.lodz.uni.math.decisionTrees.attributes.Estimate;
 import pl.lodz.uni.math.decisionTrees.attributes.FriOrSat;
@@ -32,7 +32,7 @@ public class Main {
         trainingSet.add(new Example(false, false, false, false, Guests.NONE, Price.CHEAP , false, false, Type.THAI, WaitEstimate.TO10, false));
         trainingSet.add(new Example(true, true, true, true,  Guests.FULL, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO60, true));
 */
-        ArrayList<Attribute> attributes=new ArrayList<>();
+        ArrayList<TreeAttribute> attributes=new ArrayList<>();
         trainingSet.add(new Example(false, true, null, null, null, null, null, null, null, null, false));
         trainingSet.add(new Example(true, false, null, null, null, null, null, null, null, null, false));
         trainingSet.add(new Example(true, true, null, null, null, null, null, null, null, null, true));
