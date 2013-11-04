@@ -101,12 +101,11 @@ public class Tree {
             TreeAttribute theBestAttribute = null;
             double currentMaxInformationGain = Double.MIN_VALUE;
             // znajdowanie najlepszego atrybutu
-            for (TreeAttribute attribute : attributes) {
-                double temp = attribute.informationGain(examples);
-                if (currentMaxInformationGain < attribute
-                        .informationGain(examples)) {
-                    currentMaxInformationGain = attribute
-                            .informationGain(examples);
+             for (TreeAttribute attribute : attributes) {
+                double informationGain = attribute.informationGain(examples);
+                System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
+                if (currentMaxInformationGain < informationGain) {
+                    currentMaxInformationGain = informationGain;
                     theBestAttribute = attribute;
                 }
             }

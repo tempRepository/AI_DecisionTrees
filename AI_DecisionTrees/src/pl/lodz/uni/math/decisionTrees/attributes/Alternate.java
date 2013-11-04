@@ -68,8 +68,8 @@ public class Alternate extends TreeAttribute {
                 examplesAlternateFalse.add(example);
             }
         }
-        
-        return ((((double)examplesAlternateTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ ((((double)examplesAlternateFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
+        double temp=((((double)examplesAlternateTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ ((((double)examplesAlternateFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
+        return temp;
     }
 
 }

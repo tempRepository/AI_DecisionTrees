@@ -44,28 +44,28 @@ public class Main {
         trainingSet.add(new Example(true, true, null, null, null, null, null, null, null, null, true));
         trainingSet.add(new Example(false, false, null, null, null, null, null, null, null, null, false));
         trainingSet.add(new Example(false, true, null, null, null, null, null, null, null, null, false));*/
-/*       attributes.add(new Alternate());
-       attributes.add(new Bar());*/
        
-       attributes.add(new Estimate());
+       attributes.add(new Alternate());
+       attributes.add(new Bar());   
        attributes.add(new FriOrSat());
-       attributes.add(new GuestsAttribute());
        attributes.add(new Hungry());
+       attributes.add(new GuestsAttribute());
        attributes.add(new PriceAttribute());
        attributes.add(new Raining());
        attributes.add(new Reservation());
        attributes.add(new TypeAttribute());
+       attributes.add(new Estimate());
 
-       Tree tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());
+ Tree tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());
      //  System.out.println(new GuestsAttribute().informationGain(trainingSet)); 
-       //System.out.println("Hello");
-       try {
+       System.out.println(tree.toString());
+  /*     try {
         Tree.getExamples("");
     } catch (XPathExpressionException | ParserConfigurationException
             | SAXException | IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-    }
+    }*/
        
 
     }
