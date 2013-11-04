@@ -22,10 +22,10 @@ import pl.lodz.uni.math.decisionTrees.attributes.TypeAttribute;
 
 public class Main {
 
-    public static void main(String[] args) {
-        ArrayList<Example> trainingSet = new ArrayList<>();
+    public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+        ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
        //training set
-        trainingSet.add(new Example(true, false, false, true, Guests.SOME, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.TO10, true));
+       /* trainingSet.add(new Example(true, false, false, true, Guests.SOME, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.TO10, true));
         trainingSet.add(new Example(true, false, false, true, Guests.FULL, Price.CHEAP, false, false, Type.THAI, WaitEstimate.TO60, false));
         trainingSet.add(new Example(false, true, false, false, Guests.SOME, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO10, true));
         trainingSet.add(new Example(true, false, true, true, Guests.FULL, Price.CHEAP, true, false, Type.THAI, WaitEstimate.TO30, true));
@@ -37,7 +37,7 @@ public class Main {
         trainingSet.add(new Example(true, true, true, true, Guests.FULL, Price.EXPENSIVE, false, true, Type.ITALIAN, WaitEstimate.TO30, false));
         trainingSet.add(new Example(false, false, false, false, Guests.NONE, Price.CHEAP , false, false, Type.THAI, WaitEstimate.TO10, false));
         trainingSet.add(new Example(true, true, true, true,  Guests.FULL, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO60, true));
-
+*/
         ArrayList<TreeAttribute> attributes=new ArrayList<>();
 /*        trainingSet.add(new Example(false, true, null, null, null, null, null, null, null, null, false));
         trainingSet.add(new Example(true, false, null, null, null, null, null, null, null, null, false));
@@ -57,17 +57,8 @@ public class Main {
        attributes.add(new Estimate());
 
  Tree tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());
-     //  System.out.println(new GuestsAttribute().informationGain(trainingSet)); 
-       System.out.println(tree.toString());
-  /*     try {
-        Tree.getExamples("");
-    } catch (XPathExpressionException | ParserConfigurationException
-            | SAXException | IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }*/
-       
 
+ 
     }
 
 }

@@ -103,7 +103,7 @@ public class Tree {
             // znajdowanie najlepszego atrybutu
              for (TreeAttribute attribute : attributes) {
                 double informationGain = attribute.informationGain(examples);
-                System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
+                //System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
                 if (currentMaxInformationGain < informationGain) {
                     currentMaxInformationGain = informationGain;
                     theBestAttribute = attribute;
@@ -164,71 +164,77 @@ public class Tree {
                 .newInstance();
         domFactory.setNamespaceAware(true);
         DocumentBuilder builder = domFactory.newDocumentBuilder();
-        Document doc = builder.parse("examples.xml");
+        Document doc = builder.parse(fileName);
         XPath xpath = XPathFactory.newInstance().newXPath();
         // XPath Query for showing all nodes value
-        XPathExpression expr = xpath.compile("//example/*/text()");
+        XPathExpression expr = xpath.compile("//example");
 
         Object result = expr.evaluate(doc, XPathConstants.NODESET);
         NodeList nodes = (NodeList) result;
         ArrayList<Example> examples = new ArrayList<>();
         for (int i = 0; i < nodes.getLength(); i++) {
-            Example example = new Example();
-            boolean alternative;
-            boolean bar;
-            boolean friOrSat;
-            boolean hungry;
+           
+            boolean alternate=new Boolean(nodes.item(i).getAttributes().getNamedItem("alternative").getNodeValue());
+            boolean bar=new Boolean(nodes.item(i).getAttributes().getNamedItem("bar").getNodeValue());
+            boolean friOrSat=new Boolean(nodes.item(i).getAttributes().getNamedItem("friOrSat").getNodeValue());
+            boolean hungry=new Boolean(nodes.item(i).getAttributes().getNamedItem("hungry").getNodeValue());
             Guests guests;
             Price price;
-            boolean raining;
-            boolean reservation;
+            boolean raining=new Boolean(nodes.item(i).getAttributes().getNamedItem("rain").getNodeValue());
+            boolean reservation=new Boolean(nodes.item(i).getAttributes().getNamedItem("reservation").getNodeValue());
             Type type;
             WaitEstimate estimate;
-            boolean finalDecision;
-            if (nodes.item(i++).getNodeValue() == "true") {
-                alternative = true;
-            } else {
-                alternative = false;
-            }
-
-            if (nodes.item(i++).getNodeValue() == "true") {
-                bar = true;
-            } else {
-                bar = false;
-            }
-
-            if (nodes.item(i++).getNodeValue() == "true") {
-                friOrSat = true;
-            } else {
-                friOrSat = false;
-            }
-
-            if (nodes.item(i++).getNodeValue() == "true") {
-                hungry = true;
-            } else {
-                hungry = false;
-            }
-            
-            if (nodes.item(i).getNodeValue()=="some") {
+            boolean finalDecision=new Boolean(nodes.item(i).getAttributes().getNamedItem("finalDecision").getNodeValue());
+            if (nodes.item(i).getAttributes().getNamedItem("guests").getNodeValue().equals("full")) {
+                guests=Guests.FULL;
+            } else if(nodes.item(i).getAttributes().getNamedItem("guests").getNodeValue().equals("some")){
                 guests=Guests.SOME;
-            } else if(nodes.item(i).getNodeValue()=="full"){
-guests=Guests.FULL;
             }
             else {
                 guests=Guests.NONE;
             }
-            i++;
             
-            if (nodes.item(i).getNodeValue()=="cheap") {
-                price=Price.CHEAP;
-            } else {
-
+            if (nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to10")) {
+                estimate=WaitEstimate.TO10;
+            } else if(nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to30")){
+                estimate=WaitEstimate.TO30;
             }
-
-            System.out.println(nodes.item(i).getChildNodes().item(0)
-                    .getNodeValue());
+            else if(nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to60"))
+            {
+                estimate=WaitEstimate.TO60;
+            }
+            else {
+                estimate=WaitEstimate.MORETHAN60;
+            }
+            
+            
+            if (nodes.item(i).getAttributes().getNamedItem("price").getNodeValue().equals("cheap")) {
+                price=Price.CHEAP;
+            } else if(nodes.item(i).getAttributes().getNamedItem("price").getNodeValue().equals("medium")){
+                price=Price.MEDIUM;
+            }
+            else {
+                price=Price.EXPENSIVE;
+            }
+            
+            if (nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("burger")) {
+                type=Type.BURGER;
+            } else if(nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("thai")){
+                type=Type.THAI;
+            }
+            else if(nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("italian"))
+            {
+                type=Type.ITALIAN;
+            }
+            else {
+                type=Type.FRENCH;
+            }
+            examples.add(new Example(alternate, bar, friOrSat, hungry, guests, price, raining, reservation, type, estimate, finalDecision));
+           //System.out.println(nodes.item(i).getAttributes().getNamedItem("name").getNodeValue());
+           // System.out.println(nodes.item(i).getChildNodes().item(0)
+            //        .getNodeValue());
         }
-        return null;
+        return examples;
 
     }
 }

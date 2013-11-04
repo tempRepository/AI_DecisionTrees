@@ -47,7 +47,6 @@ public abstract class TreeAttribute {
         if (q == 1) {
             return 0;
         } else if (q==0) {
-            //???
             return 0;
         } else {
             return -(q * log2(q) + (1 - q) * log2(1 - q));
@@ -67,7 +66,6 @@ public abstract class TreeAttribute {
 
         }
         
-        //Eksperymentalna wersja!
         if (positiveCounter==0 && negativeCounter==0) {
             return 0;
         }
