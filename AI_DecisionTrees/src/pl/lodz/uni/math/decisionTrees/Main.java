@@ -24,7 +24,7 @@ public class Main {
 
     public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
       //  ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
-        ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
+        ArrayList<Example> trainingSet = new ArrayList<>();
        //training set
         trainingSet.add(new Example(true, false, false, true, Guests.SOME, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.TO10, true));
         trainingSet.add(new Example(true, false, false, true, Guests.FULL, Price.CHEAP, false, false, Type.THAI, WaitEstimate.TO60, false));
@@ -58,8 +58,8 @@ public class Main {
        attributes.add(new Estimate());
 
  Tree tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());
- 
- System.out.println(tree.getDecision(new Example(false, false, false, true, Guests.FULL, Price.CHEAP, false, false, Type.THAI, WaitEstimate.TO10, null)));
+
+System.out.println(tree.getDecision(new Example(false, false, true, true, Guests.FULL, null, false, false, Type.BURGER, WaitEstimate.TO10, null)));
  
     }
 

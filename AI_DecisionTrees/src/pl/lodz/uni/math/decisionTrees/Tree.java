@@ -254,18 +254,20 @@ public class Tree {
         LinkedHashMap<Enum, Object> answer = root.getPossibilities(temp);
         Enum properKey=null;
         for (Enum key : answer.keySet()) {
-            if (answer.get(key)!=null) {
+            
+          
+            if (((ArrayList<Example>)answer.get(key)).size()>0 && ((ArrayList<Example>)answer.get(key)).get(0)==example) {
                 properKey=key;
                break;
             }
         }
-        System.out.println(properKey);
+       // System.out.println(properKey);
         if (possibilities.get(properKey) instanceof Boolean) {
-            System.out.println(properKey.toString());
-            System.out.println(possibilities.get(properKey));
+           // System.out.println(properKey.toString());
+           // System.out.println(possibilities.get(properKey));
             return possibilities.get(properKey);
         } else {
-            System.out.println(properKey.toString());
+           // System.out.println(properKey.toString());
             return ((Tree)possibilities.get(properKey)).getDecision(example);
         }
         
