@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<examples>
+
+	<example id="1">
+		<alternative>true</alternative>
+		<bar>false</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>true</hungry>
+		<guests>some</guests>
+		<price>expensive</price>
+		<rain>false</rain>
+		<reservation>true</reservation>
+		<type>french</type>
+		<estimation>to10</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+	<example id="2">
+		<alternative>true</alternative>
+		<bar>false</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>true</hungry>
+		<guests>full</guests>
+		<price>cheap</price>
+		<rain>false</rain>
+		<reservation>false</reservation>
+		<type>thai</type>
+		<estimation>to60</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="3">
+		<alternative>false</alternative>
+		<bar>true</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>false</hungry>
+		<guests>some</guests>
+		<price>cheap</price>
+		<rain>false</rain>
+		<reservation>false</reservation>
+		<type>burger</type>
+		<estimation>to10</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+	<example id="4">
+		<alternative>true</alternative>
+		<bar>false</bar>
+		<friOrSat>true</friOrSat>
+		<hungry>true</hungry>
+		<guests>full</guests>
+		<price>cheap</price>
+		<rain>true</rain>
+		<reservation>false</reservation>
+		<type>thai</type>
+		<estimation>to30</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+	<example id="5">
+		<alternative>true</alternative>
+		<bar>false</bar>
+		<friOrSat>true</friOrSat>
+		<hungry>false</hungry>
+		<guests>full</guests>
+		<price>expensive</price>
+		<rain>false</rain>
+		<reservation>true</reservation>
+		<type>french</type>
+		<estimation>moreThan60</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="6">
+		<alternative>false</alternative>
+		<bar>true</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>true</hungry>
+		<guests>some</guests>
+		<price>medium</price>
+		<rain>true</rain>
+		<reservation>true</reservation>
+		<type>italian</type>
+		<estimation>to10</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+	<example id="7">
+		<alternative>false</alternative>
+		<bar>true</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>false</hungry>
+		<guests>none</guests>
+		<price>cheap</price>
+		<rain>true</rain>
+		<reservation>false</reservation>
+		<type>burger</type>
+		<estimation>to10</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="8">
+		<alternative>false</alternative>
+		<bar>false</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>true</hungry>
+		<guests>some</guests>
+		<price>medium</price>
+		<rain>true</rain>
+		<reservation>true</reservation>
+		<type>thai</type>
+		<estimation>to10</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+	<example id="9">
+		<alternative>false</alternative>
+		<bar>true</bar>
+		<friOrSat>true</friOrSat>
+		<hungry>false</hungry>
+		<guests>full</guests>
+		<price>cheap</price>
+		<rain>true</rain>
+		<reservation>false</reservation>
+		<type>burger</type>
+		<estimation>moreThan60</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="10">
+		<alternative>true</alternative>
+		<bar>true</bar>
+		<friOrSat>true</friOrSat>
+		<hungry>true</hungry>
+		<guests>full</guests>
+		<price>expensive</price>
+		<rain>false</rain>
+		<reservation>true</reservation>
+		<type>italian</type>
+		<estimation>to30</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="11">
+		<alternative>false</alternative>
+		<bar>false</bar>
+		<friOrSat>false</friOrSat>
+		<hungry>false</hungry>
+		<guests>none</guests>
+		<price>cheap</price>
+		<rain>false</rain>
+		<reservation>false</reservation>
+		<type>thai</type>
+		<estimation>to10</estimation>
+		<finalDecision>false</finalDecision>
+	</example>
+
+	<example id="12">
+		<alternative>true</alternative>
+		<bar>true</bar>
+		<friOrSat>true</friOrSat>
+		<hungry>true</hungry>
+		<guests>full</guests>
+		<price>cheap</price>
+		<rain>false</rain>
+		<reservation>false</reservation>
+		<type>burger</type>
+		<estimation>to60</estimation>
+		<finalDecision>true</finalDecision>
+	</example>
+
+</examples>
