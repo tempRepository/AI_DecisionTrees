@@ -101,9 +101,9 @@ public class Tree {
             TreeAttribute theBestAttribute = null;
             double currentMaxInformationGain = Double.MIN_VALUE;
             // znajdowanie najlepszego atrybutu
-             for (TreeAttribute attribute : attributes) {
+            for (TreeAttribute attribute : attributes) {
                 double informationGain = attribute.informationGain(examples);
-                //System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
+                // System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
                 if (currentMaxInformationGain < informationGain) {
                     currentMaxInformationGain = informationGain;
                     theBestAttribute = attribute;
@@ -158,7 +158,8 @@ public class Tree {
     }
 
     public static ArrayList<Example> getExamples(String fileName)
-            throws ParserConfigurationException, SAXException, IOException,
+
+    throws ParserConfigurationException, SAXException, IOException,
             XPathExpressionException {
         DocumentBuilderFactory domFactory = DocumentBuilderFactory
                 .newInstance();
@@ -173,68 +174,100 @@ public class Tree {
         NodeList nodes = (NodeList) result;
         ArrayList<Example> examples = new ArrayList<>();
         for (int i = 0; i < nodes.getLength(); i++) {
-           
-            boolean alternate=new Boolean(nodes.item(i).getAttributes().getNamedItem("alternative").getNodeValue());
-            boolean bar=new Boolean(nodes.item(i).getAttributes().getNamedItem("bar").getNodeValue());
-            boolean friOrSat=new Boolean(nodes.item(i).getAttributes().getNamedItem("friOrSat").getNodeValue());
-            boolean hungry=new Boolean(nodes.item(i).getAttributes().getNamedItem("hungry").getNodeValue());
+
+            boolean alternate = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("alternative").getNodeValue());
+            boolean bar = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("bar").getNodeValue());
+            boolean friOrSat = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("friOrSat").getNodeValue());
+            boolean hungry = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("hungry").getNodeValue());
             Guests guests;
             Price price;
-            boolean raining=new Boolean(nodes.item(i).getAttributes().getNamedItem("rain").getNodeValue());
-            boolean reservation=new Boolean(nodes.item(i).getAttributes().getNamedItem("reservation").getNodeValue());
+            boolean raining = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("rain").getNodeValue());
+            boolean reservation = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("reservation").getNodeValue());
             Type type;
             WaitEstimate estimate;
-            boolean finalDecision=new Boolean(nodes.item(i).getAttributes().getNamedItem("finalDecision").getNodeValue());
-            if (nodes.item(i).getAttributes().getNamedItem("guests").getNodeValue().equals("full")) {
-                guests=Guests.FULL;
-            } else if(nodes.item(i).getAttributes().getNamedItem("guests").getNodeValue().equals("some")){
-                guests=Guests.SOME;
+            boolean finalDecision = new Boolean(nodes.item(i).getAttributes()
+                    .getNamedItem("finalDecision").getNodeValue());
+            if (nodes.item(i).getAttributes().getNamedItem("guests")
+                    .getNodeValue().equals("full")) {
+                guests = Guests.FULL;
+            } else if (nodes.item(i).getAttributes().getNamedItem("guests")
+                    .getNodeValue().equals("some")) {
+                guests = Guests.SOME;
+            } else {
+                guests = Guests.NONE;
             }
-            else {
-                guests=Guests.NONE;
+
+            if (nodes.item(i).getAttributes().getNamedItem("estimation")
+                    .getNodeValue().equals("to10")) {
+                estimate = WaitEstimate.TO10;
+            } else if (nodes.item(i).getAttributes().getNamedItem("estimation")
+                    .getNodeValue().equals("to30")) {
+                estimate = WaitEstimate.TO30;
+            } else if (nodes.item(i).getAttributes().getNamedItem("estimation")
+                    .getNodeValue().equals("to60")) {
+                estimate = WaitEstimate.TO60;
+            } else {
+                estimate = WaitEstimate.MORETHAN60;
             }
-            
-            if (nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to10")) {
-                estimate=WaitEstimate.TO10;
-            } else if(nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to30")){
-                estimate=WaitEstimate.TO30;
+
+            if (nodes.item(i).getAttributes().getNamedItem("price")
+                    .getNodeValue().equals("cheap")) {
+                price = Price.CHEAP;
+            } else if (nodes.item(i).getAttributes().getNamedItem("price")
+                    .getNodeValue().equals("medium")) {
+                price = Price.MEDIUM;
+            } else {
+                price = Price.EXPENSIVE;
             }
-            else if(nodes.item(i).getAttributes().getNamedItem("estimation").getNodeValue().equals("to60"))
-            {
-                estimate=WaitEstimate.TO60;
+
+            if (nodes.item(i).getAttributes().getNamedItem("type")
+                    .getNodeValue().equals("burger")) {
+                type = Type.BURGER;
+            } else if (nodes.item(i).getAttributes().getNamedItem("type")
+                    .getNodeValue().equals("thai")) {
+                type = Type.THAI;
+            } else if (nodes.item(i).getAttributes().getNamedItem("type")
+                    .getNodeValue().equals("italian")) {
+                type = Type.ITALIAN;
+            } else {
+                type = Type.FRENCH;
             }
-            else {
-                estimate=WaitEstimate.MORETHAN60;
-            }
-            
-            
-            if (nodes.item(i).getAttributes().getNamedItem("price").getNodeValue().equals("cheap")) {
-                price=Price.CHEAP;
-            } else if(nodes.item(i).getAttributes().getNamedItem("price").getNodeValue().equals("medium")){
-                price=Price.MEDIUM;
-            }
-            else {
-                price=Price.EXPENSIVE;
-            }
-            
-            if (nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("burger")) {
-                type=Type.BURGER;
-            } else if(nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("thai")){
-                type=Type.THAI;
-            }
-            else if(nodes.item(i).getAttributes().getNamedItem("type").getNodeValue().equals("italian"))
-            {
-                type=Type.ITALIAN;
-            }
-            else {
-                type=Type.FRENCH;
-            }
-            examples.add(new Example(alternate, bar, friOrSat, hungry, guests, price, raining, reservation, type, estimate, finalDecision));
-           //System.out.println(nodes.item(i).getAttributes().getNamedItem("name").getNodeValue());
-           // System.out.println(nodes.item(i).getChildNodes().item(0)
-            //        .getNodeValue());
+            examples.add(new Example(alternate, bar, friOrSat, hungry, guests,
+                    price, raining, reservation, type, estimate, finalDecision));
+            // System.out.println(nodes.item(i).getAttributes().getNamedItem("name").getNodeValue());
+            // System.out.println(nodes.item(i).getChildNodes().item(0)
+            // .getNodeValue());
         }
         return examples;
 
+    }
+
+    public Object getDecision(Example example) {
+        ArrayList<Example> temp = new ArrayList<>();
+        temp.add(example);
+        LinkedHashMap<Enum, Object> answer = root.getPossibilities(temp);
+        Enum properKey=null;
+        for (Enum key : answer.keySet()) {
+            if (answer.get(key)!=null) {
+                properKey=key;
+               break;
+            }
+        }
+        System.out.println(properKey);
+        if (possibilities.get(properKey) instanceof Boolean) {
+            System.out.println(properKey.toString());
+            System.out.println(possibilities.get(properKey));
+            return possibilities.get(properKey);
+        } else {
+            System.out.println(properKey.toString());
+            return ((Tree)possibilities.get(properKey)).getDecision(example);
+        }
+        
     }
 }
