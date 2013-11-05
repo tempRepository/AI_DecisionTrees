@@ -1,8 +1,11 @@
 package pl.lodz.uni.math.decisionTrees;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -60,7 +63,20 @@ public class Main {
  Tree tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());
 
 System.out.println(tree.getDecision(new Example(false, false, true, true, Guests.FULL, null, false, false, Type.BURGER, WaitEstimate.TO10, null)));
- 
+
+Graph.generateGraphImage(tree);
+
+JFrame f = new JFrame("Load Image Sample");
+
+f.addWindowListener(new WindowAdapter(){
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+    });
+
+f.add(new LoadImage());
+f.pack();
+f.setVisible(true);
     }
 
 }

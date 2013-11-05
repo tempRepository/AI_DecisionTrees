@@ -112,4 +112,9 @@ public class PriceAttribute extends TreeAttribute {
                 + remainderGuestsCheap;
     }
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Price";
+    }
 }

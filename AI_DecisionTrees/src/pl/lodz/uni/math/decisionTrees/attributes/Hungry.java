@@ -69,5 +69,11 @@ public class Hungry extends TreeAttribute {
         double temp=((((double)exampleHungryTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(exampleHungryTrue))+ ((((double)examplesHungryFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesHungryFalse));
         return temp;
     }
+    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Hungry";
+    }
 
 }

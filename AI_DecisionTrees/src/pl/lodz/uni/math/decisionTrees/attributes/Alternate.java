@@ -72,4 +72,9 @@ public class Alternate extends TreeAttribute {
         return temp;
     }
 
+    @Override
+        public String toString() {
+            // TODO Auto-generated method stub
+            return "Alternate";
+        }
 }

@@ -120,4 +120,9 @@ public class Estimate extends TreeAttribute {
                 + remainderTo60;
     }
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Estimate";
+    }
 }

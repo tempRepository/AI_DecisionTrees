@@ -125,4 +125,9 @@ public class TypeAttribute extends TreeAttribute {
                 + remainderTypeItalian+ remainderTypeThai;
     }
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Type";
+    }
 }

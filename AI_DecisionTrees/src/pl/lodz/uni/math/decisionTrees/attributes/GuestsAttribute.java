@@ -108,5 +108,9 @@ public class GuestsAttribute extends TreeAttribute {
         return   remainderGuestsFull + remainderGuestsSome
                 + remainderGuestsNone;
     }
-    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "GuestsAttribute";
+    }
 }

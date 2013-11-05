@@ -147,14 +147,25 @@ public class Tree {
     @Override
     public String toString() {
 
-        System.out.println("Root:" + root.toString());
+   /*     System.out.println("Root:" + root.toString());
         System.out.println("Branches:");
         for (Enum key : possibilities.keySet()) {
             System.out.println("Key:" + key.toString() + " "
                     + possibilities.get(key).toString() + " || ");
         }
         System.out.println("\n\n");
-        return "Tree with root:" + root.toString();
+        return "Tree with root:" + root.toString();*/
+      String temp="" ;
+      for (Enum key : possibilities.keySet()) {
+        if (possibilities.get(key) instanceof Boolean) {
+            temp+=root.toString()+" -> "+possibilities.get(key).toString()+" [ label=\""+key.toString()+"\" ]\n";
+        } else {
+            temp+=root.toString()+" -> "+((Tree)possibilities.get(key)).getRoot().toString()+" [ label=\""+key.toString()+"\" ]\n";
+            temp+=possibilities.get(key).toString();
+        }  
+      
+    }
+      return temp;
     }
 
     public static ArrayList<Example> getExamples(String fileName)

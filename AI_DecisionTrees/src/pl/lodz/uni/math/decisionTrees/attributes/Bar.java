@@ -71,7 +71,11 @@ public class Bar extends TreeAttribute {
         return ((((double)examplesAlternateTrue.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateTrue))+ ((((double)examplesAlternateFalse.size())/(double)examples.size())*TreeAttribute.finalDecisionEntropy(examplesAlternateFalse));
     }
     
-
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "Bar";
+    }
     
 
 }
