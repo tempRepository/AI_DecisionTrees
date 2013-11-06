@@ -17,8 +17,7 @@ public abstract class TreeAttribute {
             }
 
         }
-        // returns information gain
-        // returns NaN because of log0!
+      
         if (positiveCounter != 0 && negativeCounter != 0) {
             double informationContent = -((positiveCounter / (positiveCounter + negativeCounter))
                     * Math.log((positiveCounter / (positiveCounter + negativeCounter))) + (negativeCounter / (positiveCounter + negativeCounter))

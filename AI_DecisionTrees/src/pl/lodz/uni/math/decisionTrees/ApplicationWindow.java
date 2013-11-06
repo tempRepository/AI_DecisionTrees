@@ -200,7 +200,23 @@ public class ApplicationWindow {
         
         
         
-     ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
+    // ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
+        ArrayList<Example> trainingSet = new ArrayList<>();
+        
+        trainingSet.add(new Example(true, false, false, true, Guests.SOME, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.TO10, true));
+        trainingSet.add(new Example(true, false, false, true, Guests.FULL, Price.CHEAP, false, false, Type.THAI, WaitEstimate.TO60, false));
+        trainingSet.add(new Example(false, true, false, false, Guests.SOME, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO10, true));
+        trainingSet.add(new Example(true, false, true, true, Guests.FULL, Price.CHEAP, true, false, Type.THAI, WaitEstimate.TO30, true));
+        trainingSet.add(new Example(true, false, true, false, Guests.FULL, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.MORETHAN60, false));
+        trainingSet.add(new Example(false, true, false, true, Guests.SOME, Price.MEDIUM, true, true, Type.ITALIAN, WaitEstimate.TO10, true));
+        trainingSet.add(new Example(false, true, false, false, Guests.NONE, Price.CHEAP, true, false, Type.BURGER, WaitEstimate.TO10, false));
+        trainingSet.add(new Example(false, false, false, true, Guests.SOME, Price.MEDIUM, true, true, Type.THAI, WaitEstimate.TO10, true));
+        trainingSet.add(new Example(false, true, true, false, Guests.FULL, Price.CHEAP, true, false, Type.BURGER, WaitEstimate.MORETHAN60, false));
+        trainingSet.add(new Example(true, true, true, true, Guests.FULL, Price.EXPENSIVE, false, true, Type.ITALIAN, WaitEstimate.TO30, false));
+        trainingSet.add(new Example(false, false, false, false, Guests.NONE, Price.CHEAP , false, false, Type.THAI, WaitEstimate.TO10, false));
+        trainingSet.add(new Example(true, true, true, true, Guests.FULL, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO60, true));
+
+
         ArrayList<TreeAttribute> attributes=new ArrayList<>();
        attributes.add(new Alternate());
        attributes.add(new Bar());   
@@ -213,6 +229,7 @@ public class ApplicationWindow {
        attributes.add(new TypeAttribute());
        attributes.add(new Estimate());
 
- tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());       
+ tree=(Tree) Tree.decisionTreeLearning(trainingSet, attributes, new ArrayList<Example>());  
+ Graph.generateGraphImage(tree);
     }
 }

@@ -103,7 +103,6 @@ public class Tree {
             // znajdowanie najlepszego atrybutu
             for (TreeAttribute attribute : attributes) {
                 double informationGain = attribute.informationGain(examples);
-                // System.out.println("Attributes: "+attributes.size()+" "+attribute.toString()+" "+informationGain);
                 if (currentMaxInformationGain < informationGain) {
                     currentMaxInformationGain = informationGain;
                     theBestAttribute = attribute;
@@ -125,21 +124,6 @@ public class Tree {
             }
             return newTree;
 
-            /*
-             * for (Enum value : theBestAttribute.getPossibilities()) {
-             * ArrayList<Example> examplesWithAttribute = new ArrayList<>(); for
-             * (Example example : examples) { if (theBestAttribute instanceof
-             * Alternate) { if (example.getAlternate()==value) {
-             * 
-             * } } else {
-             * 
-             * }
-             * 
-             * } }
-             * 
-             * }
-             */
-
         }
 
     }
@@ -147,25 +131,21 @@ public class Tree {
     @Override
     public String toString() {
 
-   /*     System.out.println("Root:" + root.toString());
-        System.out.println("Branches:");
+        String temp = "";
         for (Enum key : possibilities.keySet()) {
-            System.out.println("Key:" + key.toString() + " "
-                    + possibilities.get(key).toString() + " || ");
+            if (possibilities.get(key) instanceof Boolean) {
+                temp += root.toString() + " -> "
+                        + possibilities.get(key).toString() + " [ label=\""
+                        + key.toString() + "\" ]\n";
+            } else {
+                temp += root.toString() + " -> "
+                        + ((Tree) possibilities.get(key)).getRoot().toString()
+                        + " [ label=\"" + key.toString() + "\" ]\n";
+                temp += possibilities.get(key).toString();
+            }
+
         }
-        System.out.println("\n\n");
-        return "Tree with root:" + root.toString();*/
-      String temp="" ;
-      for (Enum key : possibilities.keySet()) {
-        if (possibilities.get(key) instanceof Boolean) {
-            temp+=root.toString()+" -> "+possibilities.get(key).toString()+" [ label=\""+key.toString()+"\" ]\n";
-        } else {
-            temp+=root.toString()+" -> "+((Tree)possibilities.get(key)).getRoot().toString()+" [ label=\""+key.toString()+"\" ]\n";
-            temp+=possibilities.get(key).toString();
-        }  
-      
-    }
-      return temp;
+        return temp;
     }
 
     public static ArrayList<Example> getExamples(String fileName)
@@ -251,9 +231,7 @@ public class Tree {
             }
             examples.add(new Example(alternate, bar, friOrSat, hungry, guests,
                     price, raining, reservation, type, estimate, finalDecision));
-            // System.out.println(nodes.item(i).getAttributes().getNamedItem("name").getNodeValue());
-            // System.out.println(nodes.item(i).getChildNodes().item(0)
-            // .getNodeValue());
+
         }
         return examples;
 
@@ -263,24 +241,21 @@ public class Tree {
         ArrayList<Example> temp = new ArrayList<>();
         temp.add(example);
         LinkedHashMap<Enum, Object> answer = root.getPossibilities(temp);
-        Enum properKey=null;
+        Enum properKey = null;
         for (Enum key : answer.keySet()) {
-            
-          
-            if (((ArrayList<Example>)answer.get(key)).size()>0 && ((ArrayList<Example>)answer.get(key)).get(0)==example) {
-                properKey=key;
-               break;
+
+            if (((ArrayList<Example>) answer.get(key)).size() > 0
+                    && ((ArrayList<Example>) answer.get(key)).get(0) == example) {
+                properKey = key;
+                break;
             }
         }
-       // System.out.println(properKey);
+
         if (possibilities.get(properKey) instanceof Boolean) {
-           // System.out.println(properKey.toString());
-           // System.out.println(possibilities.get(properKey));
             return possibilities.get(properKey);
         } else {
-           // System.out.println(properKey.toString());
-            return ((Tree)possibilities.get(properKey)).getDecision(example);
+            return ((Tree) possibilities.get(properKey)).getDecision(example);
         }
-        
+
     }
 }

@@ -7,9 +7,9 @@ import java.io.PrintWriter;
 public class Graph {
     private static void generateJPG() throws IOException
     {
-        Process p ;
+        Process p ;  
         p=Runtime.getRuntime().exec("cat graph | uniq > graph");
-        p=Runtime.getRuntime().exec("rm output.jpg");  
+        p=Runtime.getRuntime().exec("rm output.jpg"); 
         p= Runtime.getRuntime().exec("dot -Tjpg graph  -o output.jpg");  
     }
     

@@ -7,8 +7,8 @@ import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 
 public class Alternate extends TreeAttribute {
-  //zmienić na protected!
-    public double entropy(ArrayList<Example> examples) {
+  
+    protected double entropy(ArrayList<Example> examples) {
         // rozkład klas decyzyjnych dla każdej wartości atrybutu Alternate-
         // True, False
         ArrayList<Example> examplesAlternateTrue = new ArrayList<>();

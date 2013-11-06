@@ -7,9 +7,8 @@ import pl.lodz.uni.math.decisionTrees.Decision;
 import pl.lodz.uni.math.decisionTrees.Example;
 
 public class Bar extends TreeAttribute {
-//zmienić na protected!
     @Override
-    public double entropy(ArrayList<Example> examples) {
+    protected double entropy(ArrayList<Example> examples) {
         ArrayList<Example> examplesBarTrue = new ArrayList<>();
         ArrayList<Example> examplesBarFalse = new ArrayList<>();
 
@@ -21,7 +20,6 @@ public class Bar extends TreeAttribute {
             }
         }
         
-      /*  double a=informationContent(examplesBarTrue);*/
         double probabilityTrue=((double) examplesBarTrue.size()
                 / ((double) examplesBarFalse.size() + (double) examplesBarTrue
                         .size()));
