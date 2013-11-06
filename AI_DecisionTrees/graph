@@ -1,0 +1,12 @@
+digraph G {GuestsAttribute -> Hungry [ label="FULL" ]
+Hungry -> Type [ label="YES" ]
+Type -> true [ label="BURGER" ]
+Type -> true [ label="FRENCH" ]
+Type -> false [ label="ITALIAN" ]
+Type -> FriOrSat [ label="THAI" ]
+FriOrSat -> true [ label="YES" ]
+FriOrSat -> false [ label="NO" ]
+Hungry -> false [ label="NO" ]
+GuestsAttribute -> false [ label="NONE" ]
+GuestsAttribute -> true [ label="SOME" ]
+}
