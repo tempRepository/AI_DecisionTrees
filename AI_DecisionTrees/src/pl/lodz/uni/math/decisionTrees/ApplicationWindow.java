@@ -200,8 +200,8 @@ public class ApplicationWindow {
         
         
         
-    // ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
-        ArrayList<Example> trainingSet = new ArrayList<>();
+    ArrayList<Example> trainingSet = Tree.getExamples("examples.xml");
+      /*  ArrayList<Example> trainingSet = new ArrayList<>();
         
         trainingSet.add(new Example(true, false, false, true, Guests.SOME, Price.EXPENSIVE, false, true, Type.FRENCH, WaitEstimate.TO10, true));
         trainingSet.add(new Example(true, false, false, true, Guests.FULL, Price.CHEAP, false, false, Type.THAI, WaitEstimate.TO60, false));
@@ -215,7 +215,7 @@ public class ApplicationWindow {
         trainingSet.add(new Example(true, true, true, true, Guests.FULL, Price.EXPENSIVE, false, true, Type.ITALIAN, WaitEstimate.TO30, false));
         trainingSet.add(new Example(false, false, false, false, Guests.NONE, Price.CHEAP , false, false, Type.THAI, WaitEstimate.TO10, false));
         trainingSet.add(new Example(true, true, true, true, Guests.FULL, Price.CHEAP, false, false, Type.BURGER, WaitEstimate.TO60, true));
-
+*/
 
         ArrayList<TreeAttribute> attributes=new ArrayList<>();
        attributes.add(new Alternate());

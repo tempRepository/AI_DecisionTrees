@@ -48,7 +48,7 @@
 	</example>
 
 	<example id="10" alternative="true" bar="true" friOrSat="true"
-		hungry="false" guests="full" price="expensive" rain="false"
+		hungry="true" guests="full" price="expensive" rain="false"
 		reservation="true" type="italian" estimation="to30" finalDecision="false">
 	</example>
 
